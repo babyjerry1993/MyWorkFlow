@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import sy.model.User;
-import sy.service.UserServiceI;
+import sy.model.Tuser;
+import sy.service.TuserServiceI;
 import sy.util.SessionScope;
 
 
@@ -21,7 +21,7 @@ import sy.util.SessionScope;
 public class UserController {
 
 	@Autowired
-	private UserServiceI userService;
+	private TuserServiceI userService;
 	
 	@RequestMapping("/index")
 	public ModelAndView index(Model model) {
@@ -45,12 +45,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/login.do",  method = RequestMethod.POST)
-	public String getLogin(User user,HttpServletRequest request) {
+	public String getLogin(Tuser user,HttpServletRequest request) {
 		
 		System.out.println(user.getUsername());
 		System.out.println(user.getUserpassword());
 		
-		User res = userService.findUserByUsernameAndPassword(user);
+		Tuser res = userService.findUserByUsernameAndPassword(user);
 		
 		if(null!=res) {
 			System.out.println("登录成功");

@@ -5,16 +5,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import sy.model.User;
+import sy.model.Tuser;
 import sy.service.ManagerServiceI;
-import sy.service.UserServiceI;
+import sy.service.TuserServiceI;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:spring.xml" })
 public class TestMybatis {
 
 	@Resource
-	private UserServiceI userService;
+	private TuserServiceI userService;
 
 	@Resource
 	private ManagerServiceI managerService;
@@ -23,7 +23,7 @@ public class TestMybatis {
 	public void select() {
 
 		// getUserById
-		User user = userService.selectByUserId(123);
+		Tuser user = userService.selectByTuserId(123);
 		System.out.println(user.getUsername());
 
 	}
