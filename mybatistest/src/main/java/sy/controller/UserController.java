@@ -45,7 +45,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/login.do",  method = RequestMethod.POST)
-	public String getLogin(Tuser user,HttpServletRequest request) {
+	public ModelAndView getLogin(Tuser user,HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
 		
 		System.out.println(user.getUsername());
 		System.out.println(user.getUserpassword());
@@ -56,17 +57,24 @@ public class UserController {
 			System.out.println("登录成功");
 			HttpSession session = request.getSession();
 			session.setAttribute("username", user.getUsername());
-			return "redirect:/showUser.jsp";
+			mv.setViewName("showUser");
+			return mv;
 		}
 		System.out.println("登录失败");
-		return "redirect:/login.jsp?errMsg='fail'&Method='GET'";
+		mv.addObject("errMsg", "fail");
+		mv.setViewName("login");
+		return mv;
 	}
 	
 	@RequestMapping(value = "/showUser.do",  method = RequestMethod.GET)
-	public String data(@SessionScope("username") String username) {
+	public ModelAndView data(@SessionScope("username") String username) {
+		
+		ModelAndView mv = new ModelAndView();
 		
 		System.out.println(username);
-		return "showUser";
+		mv.setViewName("showUser");
+		
+		return mv;
 	}
 
 }
