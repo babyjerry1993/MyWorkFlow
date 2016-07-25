@@ -1,0 +1,13 @@
+sy\service\TuserServiceI.class
+sy\dao\TuserMapper.class
+sy\dao\ManagerMapper.class
+sy\dao\PostMapper.class
+sy\model\Tuser.class
+sy\util\SessionScope.class
+sy\model\Post.class
+sy\service\impl\ManageServiceImpl.class
+sy\model\Manager.class
+sy\service\impl\TuserServiceImpl.class
+sy\controller\UserController.class
+sy\service\ManagerServiceI.class
+sy\util\SessionScopeMethodArgumentResolver.class
