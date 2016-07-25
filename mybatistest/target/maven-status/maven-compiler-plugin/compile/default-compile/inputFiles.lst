@@ -1,0 +1,13 @@
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\service\impl\ManageServiceImpl.java
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\service\impl\UserServiceImpl.java
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\service\ManagerServiceI.java
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\model\Manager.java
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\service\UserServiceI.java
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\dao\ManagerMapper.java
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\model\User.java
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\util\SessionScope.java
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\util\SessionScopeMethodArgumentResolver.java
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\dao\PostMapper.java
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\model\Post.java
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\dao\UserMapper.java
+D:\shawn\sts_ssm\mybatistest\src\main\java\sy\controller\UserController.java
