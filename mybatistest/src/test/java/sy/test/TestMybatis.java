@@ -21,11 +21,10 @@ public class TestMybatis {
 
 	@Test
 	public void select() {
-
 		// getUserById
-		Tuser user = userService.selectByTuserId(123);
+		Tuser user = userService.selectByTuserId(4);
 		System.out.println(user.getUsername());
-
+		System.out.println("中文中文");
 	}
 
 }
