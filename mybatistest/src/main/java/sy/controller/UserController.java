@@ -1,7 +1,5 @@
 package sy.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import sy.model.Tuser;
 import sy.service.TuserServiceI;
-import sy.util.SessionScope;
+
 
 @Controller
 @RequestMapping
@@ -24,21 +22,23 @@ public class UserController {
 	@Autowired
 	private TuserServiceI userService;
 
-	
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public ModelAndView login(Model model, String errMsg, @SessionScope("userName") String username) {
+	public ModelAndView login(Model model, String errMsg,HttpServletRequest request) {
 
 		logger.info("进入---->login_GET");
 
 		ModelAndView mv = new ModelAndView();
 		
-		if (!StringUtils.isEmpty(username)) {
+		HttpSession session = request.getSession();
+
+		if (StringUtils.isNotEmpty((String)session.getAttribute("username"))) {
 			// session判断用户是否已经登录
-			logger.info("already logon");
+			logger.info("该账户已经登录");
 			mv.setViewName("showUser");
 			return mv;
 		}
 		if (StringUtils.isEmpty(errMsg)) {
+			logger.info("errMsg内没有内容");
 			model.addAttribute("errMsg", "");
 		} else {
 			model.addAttribute("errMsg", "fail");
@@ -54,42 +54,142 @@ public class UserController {
 
 		ModelAndView mv = new ModelAndView();
 
-		System.out.println(user.getUsername());
-		System.out.println(user.getUserpassword());
-
 		Tuser res = userService.findUserByUsernameAndPassword(user);
-		List<Tuser> list = new ArrayList<Tuser>();
-		list = userService.getTusers();
-		mv.addObject("users", list);
-		System.out.println("list的内容如下:\n"+list);
-		
 
 		if (null != res) {
-			logger.info("logon");
+			
+			String remark = userService.findTuserRemark(user);
+			//设置session
 			HttpSession session = request.getSession();
 			session.setAttribute("username", user.getUsername());
-			mv.setViewName("showUser");
+			
+			if (remark.equals("employee")) {
+				mv.setViewName("emp_main");
+			} else if (remark.equals("boss")) {
+				mv.setViewName("boss_main");
+			}else if (remark.equals("manager")) {
+				mv.setViewName("mana_main");
+			}else {
+				mv.setViewName("404");
+			}
+			
+			logger.info("登录成功");
 			return mv;
 		}
-		logger.info("login failed");
+
+		logger.info("登录失败");
 		mv.addObject("errMsg", "fail");
 		mv.setViewName("login");
 		return mv;
 	}
 
 	@RequestMapping(value = "/showUser.do", method = RequestMethod.GET)
-	public ModelAndView data(@SessionScope("username") String username) {
+	public ModelAndView showUser(HttpServletRequest request) {
 
 		ModelAndView mv = new ModelAndView();
-		logger.info("the username is:\n" + username);
 		mv.setViewName("showUser");
 
 		return mv;
 	}
-	
-	public static void main(String[] args) {
-		logger.info("进入---->login_GET");
-		System.out.println("测试一下看会不会中文乱码");
+
+	@RequestMapping(value = "/empMain.do", method = RequestMethod.GET)
+	public ModelAndView empMain() {
+
+		ModelAndView mv = new ModelAndView();
+
+		logger.info("进入了empMain方法");
+		mv.setViewName("emp_main");
+
+		return mv;
 	}
+
+	@RequestMapping(value = "/bossMain.do", method = RequestMethod.GET)
+	public ModelAndView bossMain() {
+
+		ModelAndView mv = new ModelAndView();
+
+		logger.info("进入了bossMain方法");
+		mv.setViewName("boss_main");
+
+		return mv;
+	}
+	
+	@RequestMapping(value = "/manaMain.do", method = RequestMethod.GET)
+	public ModelAndView manaMain() {
+
+		ModelAndView mv = new ModelAndView();
+
+		logger.info("进入了manaMain方法");
+		mv.setViewName("mana_main");
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/askForLeave.do", method = RequestMethod.GET)
+	public ModelAndView askForLeave() {
+
+		ModelAndView mv = new ModelAndView();
+		
+		logger.info("进入了askForLeave方法,这里要做运行一个[请假]流程");
+		mv.setViewName("askForLeave");
+
+		return mv;
+	}
+	
+	@RequestMapping(value = "/doAsk.do", method = RequestMethod.GET)
+	public ModelAndView doAsk() {
+
+		ModelAndView mv = new ModelAndView();
+		
+		logger.info("进入了doAsk方法,发出申请");
+		mv.setViewName("finishAsk");
+
+		return mv;
+	}
+
+	@RequestMapping(value = "/checkAsk.do", method = RequestMethod.GET)
+	public ModelAndView checkAsk() {
+
+		ModelAndView mv = new ModelAndView();
+
+		logger.info("进入了checkAsk方法,这里要做运行一个[审核]流程");
+		mv.setViewName("checkAsk");
+
+		return mv;
+	}
+	
+	@RequestMapping(value = "/doCheck.do", method = RequestMethod.GET)
+	public ModelAndView doCheck() {
+
+		ModelAndView mv = new ModelAndView();
+
+		logger.info("进入了doCheck方法,完成审核");
+		mv.setViewName("finishCheck");
+
+		return mv;
+	}
+	
+	@RequestMapping(value = "/uploadWorkFlow.do", method = RequestMethod.GET)
+	public ModelAndView uploadWorkFlow() {
+
+		ModelAndView mv = new ModelAndView();
+		
+		logger.info("进入了uploadWorkFlow方法,这里要做的是上传业务流程");
+		mv.setViewName("uploadWorkFlow");
+
+		return mv;
+	}
+	
+	@RequestMapping(value = "/doUpload.do", method = RequestMethod.GET)
+	public ModelAndView doUpload() {
+
+		ModelAndView mv = new ModelAndView();
+		
+		logger.info("进入了doUpload方法,上传工作完成");
+		mv.setViewName("finishUpload");
+
+		return mv;
+	}
+	
 
 }

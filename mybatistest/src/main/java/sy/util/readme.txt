@@ -1,1 +1,1 @@
-加了这两个sessionScope文件之后,session的写法很方便
+加了这两个sessionScope文件之后,session的写法很方便,(自定义注解)

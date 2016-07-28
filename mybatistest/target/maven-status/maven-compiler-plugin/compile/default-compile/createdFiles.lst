@@ -1,4 +1,3 @@
-.gitignore
 sy\service\TuserServiceI.class
 sy\dao\TuserMapper.class
 sy\dao\ManagerMapper.class

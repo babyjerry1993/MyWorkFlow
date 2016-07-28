@@ -71,4 +71,10 @@ public class TuserServiceImpl implements TuserServiceI {
 		return userMapper.findTuserByUsernameAndPassword(user);
 	}
 
+	@Override
+	public String findTuserRemark(Tuser user) {
+		// 通过用户名获得用户的角色:管理员,老板,员工
+		return userMapper.findTuserRemark(user);
+	}
+
 }

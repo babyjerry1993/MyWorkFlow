@@ -4,7 +4,9 @@ import java.util.List;
 
 import sy.model.Tuser;
 
-public interface TuserServiceI {    
+public interface TuserServiceI { 
+	
+	public String findTuserRemark(Tuser record);
     
     public Tuser selectByTuserId(Integer id);
     

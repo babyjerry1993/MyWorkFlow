@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<bpmn:Definitions xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL-XMI" id="_bEepgFMAEeaFR73bS0PCFg" name="NewDefinitions">
-  <rootElements xsi:type="bpmn:Process" id="_dntbTFMAEeaFR73bS0PCFg"/>
-</bpmn:Definitions>
