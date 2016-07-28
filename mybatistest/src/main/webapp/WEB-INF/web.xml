@@ -5,7 +5,7 @@
 		 					 http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	metadata-complete="true" version="3.0">
 
-	<display-name>mybatistest</display-name>
+	<display-name>MyWorkFlow</display-name>
 	<description>test</description>
 
 	<!-- 这两个配对使用 -->

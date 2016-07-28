@@ -77,4 +77,10 @@ public class TuserServiceImpl implements TuserServiceI {
 		return userMapper.findTuserRemark(user);
 	}
 
+//	@Override
+//	public String findTuserRemarkBySession(String str) {
+//		// 通过session中的str获取用户的备注
+//		return userMapper.findTuserRemarkBySession(str);
+//	}
+
 }

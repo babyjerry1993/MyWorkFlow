@@ -2,11 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
 		 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>sy.mybatistest</groupId>
-	<artifactId>mybatistest</artifactId>
+	<groupId>sy.MyWorkFlow</groupId>
+	<artifactId>MyWorkFlow</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mybatistest Maven Webapp</name>
+	<name>MyWorkFlow Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<dependencies>
@@ -134,8 +134,8 @@
 			<version>2.14</version>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
-		<finalName>mybatistest</finalName>
+		<finalName>MyWorkFlow</finalName>
 	</build>
 </project>

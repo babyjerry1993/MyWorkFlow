@@ -23,7 +23,7 @@ public class UserController {
 	private TuserServiceI userService;
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public ModelAndView login(Model model, String errMsg,HttpServletRequest request) {
+	public ModelAndView login(Model model,Tuser user, String errMsg,HttpServletRequest request) {
 
 		logger.info("进入---->login_GET");
 
@@ -32,9 +32,22 @@ public class UserController {
 		HttpSession session = request.getSession();
 
 		if (StringUtils.isNotEmpty((String)session.getAttribute("username"))) {
+			
 			// session判断用户是否已经登录
 			logger.info("该账户已经登录");
-			mv.setViewName("showUser");
+			//并判断已登录的角色,进行视图分流
+			String remark = (String)session.getAttribute("userremark");
+			if (remark.equals("employee")) {
+				mv.setViewName("emp_main");
+			} else if (remark.equals("boss")) {
+				mv.setViewName("boss_main");
+			}else if (remark.equals("manager")) {
+				mv.setViewName("mana_main");
+			}else {
+				mv.setViewName("404");
+			}
+			//避免每次自动登录,进入到登录界面
+			mv.setViewName("login");
 			return mv;
 		}
 		if (StringUtils.isEmpty(errMsg)) {
@@ -62,6 +75,7 @@ public class UserController {
 			//设置session
 			HttpSession session = request.getSession();
 			session.setAttribute("username", user.getUsername());
+			session.setAttribute("userremark", remark);
 			
 			if (remark.equals("employee")) {
 				mv.setViewName("emp_main");
@@ -136,17 +150,6 @@ public class UserController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/doAsk.do", method = RequestMethod.GET)
-	public ModelAndView doAsk() {
-
-		ModelAndView mv = new ModelAndView();
-		
-		logger.info("进入了doAsk方法,发出申请");
-		mv.setViewName("finishAsk");
-
-		return mv;
-	}
-
 	@RequestMapping(value = "/checkAsk.do", method = RequestMethod.GET)
 	public ModelAndView checkAsk() {
 
@@ -154,17 +157,6 @@ public class UserController {
 
 		logger.info("进入了checkAsk方法,这里要做运行一个[审核]流程");
 		mv.setViewName("checkAsk");
-
-		return mv;
-	}
-	
-	@RequestMapping(value = "/doCheck.do", method = RequestMethod.GET)
-	public ModelAndView doCheck() {
-
-		ModelAndView mv = new ModelAndView();
-
-		logger.info("进入了doCheck方法,完成审核");
-		mv.setViewName("finishCheck");
 
 		return mv;
 	}
@@ -180,16 +172,4 @@ public class UserController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/doUpload.do", method = RequestMethod.GET)
-	public ModelAndView doUpload() {
-
-		ModelAndView mv = new ModelAndView();
-		
-		logger.info("进入了doUpload方法,上传工作完成");
-		mv.setViewName("finishUpload");
-
-		return mv;
-	}
-	
-
 }

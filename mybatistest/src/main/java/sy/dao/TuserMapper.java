@@ -32,5 +32,8 @@ public interface TuserMapper {
 	
 	@Select("select userRemark from tuser where userName = #{username} and userPassword = #{userpassword}")
 	String findTuserRemark(Tuser user);
+	
+//	@Select("select userRemark from tuser where userName = #{str}")
+//	String findTuserRemarkBySession(String str);
   
 }
