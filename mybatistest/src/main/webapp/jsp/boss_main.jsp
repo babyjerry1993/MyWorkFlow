@@ -6,11 +6,11 @@
 <meta charset="utf-8">
 <title>boss_main</title>
 </head>
-<h1>boss:业务办理</h1>
-<hr />
-	<div align="left">
-      <a href="<%=request.getContextPath()%>/checkAsk.do">1.审核</a>
-	</div>
+<div align="left">
+	<h1>boss:业务办理</h1>
+	<hr />
+	<a href="<%=request.getContextPath()%>/checkAsk.do">1.审核</a>
+</div>
 <body>
 </body>
 </html>

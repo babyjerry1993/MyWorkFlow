@@ -6,9 +6,9 @@
 <meta charset="utf-8">
 <title>mana_main</title>
 </head>
-<h1>manager:业务办理</h1>
-<hr />
 <div align="left">
+	<h1>manager:业务办理</h1>
+	<hr />
 	<a href="<%=request.getContextPath()%>/uploadWorkFlow.do">1.上载业务流程</a>
 </div>
 <body>
