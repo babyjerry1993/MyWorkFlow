@@ -17,7 +17,5 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
 		<!-- 配置创建表策略 :没有表时，自动创建 -->
 		<property name="databaseSchemaUpdate" value="true"></property>
-
 	</bean>
-
 </beans>

@@ -6,8 +6,6 @@ import sy.model.Tuser;
 
 public interface TuserServiceI { 
 	
-//	public String findTuserRemarkBySession(String str);
-	
 	public String findTuserRemark(Tuser record);
     
     public Tuser selectByTuserId(Integer id);

@@ -1,51 +1,44 @@
 package sy.service.impl;
 
+import java.io.FileInputStream;
+import java.util.zip.ZipInputStream;
+
 import org.activiti.engine.FormService;
 import org.activiti.engine.HistoryService;
+import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.springframework.stereotype.Service;
+
+import sy.form.WorkflowBean;
 import sy.service.WorkflowServiceI;
-
-
+@Service("workflowService")
 public class WorkflowServiceImpl implements WorkflowServiceI {
-	
-	private RepositoryService repositoryService;
-	private RuntimeService runtimeService;
-	private TaskService taskService;
-	private FormService formService;
-	private HistoryService historyService;
-	
-	public RepositoryService getRepositoryService() {
-		return repositoryService;
-	}
-	public void setRepositoryService(RepositoryService repositoryService) {
-		this.repositoryService = repositoryService;
-	}
-	public RuntimeService getRuntimeService() {
-		return runtimeService;
-	}
-	public void setRuntimeService(RuntimeService runtimeService) {
-		this.runtimeService = runtimeService;
-	}
-	public TaskService getTaskService() {
-		return taskService;
-	}
-	public void setTaskService(TaskService taskService) {
-		this.taskService = taskService;
-	}
-	public FormService getFormService() {
-		return formService;
-	}
-	public void setFormService(FormService formService) {
-		this.formService = formService;
-	}
-	public HistoryService getHistoryService() {
-		return historyService;
-	}
-	public void setHistoryService(HistoryService historyService) {
-		this.historyService = historyService;
-	}
+
+	private ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+	private RepositoryService repositoryService = processEngine.getRepositoryService();
+	private RuntimeService runtimeService = processEngine.getRuntimeService();
+	private TaskService taskService = processEngine.getTaskService();
+	private FormService formService = processEngine.getFormService();
+	private HistoryService historyService = processEngine.getHistoryService();
 
 	
+
+	@Override
+	public void saveNewDeploye(WorkflowBean workflowBean) {
+		// 部署一个zip包含的工作流程定义
+		try {
+			// 将File类型的文件转化成ZipInputStream流
+			ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(workflowBean.getFile()));
+			repositoryService.createDeployment()// 创建部署对象
+					.name(workflowBean.getFilename())// 添加部署名称
+					.addZipInputStream(zipInputStream)//
+					.deploy();// 完成部署
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
